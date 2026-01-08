@@ -1,81 +1,58 @@
-import React from "react";
-import heroBg from "../assets/hero-bg.png";
+import { useState, useEffect } from 'react';
+import heroImg from '../assets/hero-bg.png';
+import swing from '../assets/swing.png';
 
 export default function Hero() {
+  const sentence = "Baby Sleep With Mother's Touch";
+  const typingSpeed = 240;
+  const restartDelay = 2600;
+
+  const [text, setText] = useState('');
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    let timer;
+
+    if (index < sentence.length) {
+      timer = setTimeout(() => {
+        setText((prev) => prev + sentence[index]);
+        setIndex((prev) => prev + 1);
+      }, typingSpeed);
+    } else {
+      timer = setTimeout(() => {
+        setText('');
+        setIndex(0);
+      }, restartDelay);
+    }
+
+    return () => clearTimeout(timer);
+  }, [index]);
+
   return (
-    <section
-      id="top"
-      className="relative text-gray-900 overflow-hidden"
-      style={{
-        backgroundImage: `url(${heroBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        minHeight: "90vh",
-      }}
-    >
-      {/* Light overlay */}
-      <div className="absolute inset-0 bg-white/40"></div>
+    <section className="relative w-full bg-pink-100" id="home">
+      {/* HERO BACKGROUND IMAGE */}
+      <img
+        src={heroImg}
+        alt="SleepWell Cradle Springs"
+        className="w-full h-auto object-cover"
+      />
 
-      {/* Floating icons */}
-      <span className="absolute top-32 left-10 text-3xl animate-float">🍼</span>
-      <span className="absolute bottom-24 right-16 text-3xl animate-float delay-200">💤</span>
-      <span className="absolute top-44 right-1/4 text-3xl animate-float delay-400">👶</span>
-
-      {/* Content */}
-      <div className="relative max-w-7xl mx-auto px-6 pt-10 text-center">
-        <h1 className="text-3xl md:text-5xl font-extrabold mb-6 text-blue-900 tracking-tight animate-fadeUp">
-          Baby Sleep With{" "}
-          <span className="text-pink-600">Mother’s Touch</span>
-        </h1>
-
-        <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-800 mb-5 animate-fadeUp delay-200">
-          Premium cradle springs and baby comfort products trusted by parents
-          for safe, peaceful sleep.
-        </p>
-
-        <a
-          href="#products"
-          className="
-            inline-block px-8 py-3 rounded-xl bg-blue-700 text-white font-bold text-lg
-            transition-all duration-300
-            hover:bg-blue-800 hover:scale-105
-            shadow-lg animate-fadeUp delay-400
-          "
-        >
-          Explore Products
-        </a>
+      {/* SWING IMAGE – RIGHT SIDE, NO BG */}
+      <div className="absolute inset-0 flex items-center justify-end pr-6 sm:pr-10 md:pr-16">
+        <img
+          src={swing}
+          alt="Swing"
+          className="w-48 sm:w-56 md:w-72 lg:w-80 object-contain animate-float-zoom"
+        />
       </div>
 
-      {/* Animations */}
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-
-        .animate-float {
-          animation: float 4s ease-in-out infinite;
-        }
-
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-400 { animation-delay: 0.4s; }
-
-        @keyframes fadeUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fadeUp {
-          animation: fadeUp 1s ease forwards;
-        }
-      `}</style>
+      {/* TEXT OVERLAY */}
+      <div className="absolute top-4 right-4 text-right px-4 py-2">
+        <h1 className="text-3xl sm:text-4xl md:text-4xl font-bold neon-text animate-slideUp">
+          {text}
+          <span className="neon-cursor">|</span>
+        </h1>
+      </div>
     </section>
   );
 }

@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <section id="about" className="bg-pink-50 text-gray-800 py-24">
+    <section id="about" className="bg-rose-50 text-gray-800 py-24">
       <div className="max-w-5xl mx-auto px-6">
         {/* Heading */}
         <h3 className="text-4xl md:text-5xl font-bold text-center mb-12">
