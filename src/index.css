@@ -16,28 +16,28 @@ html {
 }
 /* Soft golden glow */
 .neon-text {
-  color: #00fff7;
+  color: #e32c2c;
   text-shadow:
-    0 0 6px #00fff7,
-    0 0 14px #00e5ff,
-    0 0 30px #00cfff;
+    0 0 6px #ffbb00,
+    0 0 14px #ffff00,
+    0 0 30px #d9ff00;
   animation: neonPulse 3s ease-in-out infinite;
 }
 
-@keyframes neonPulse {
+/* @keyframes neonPulse {
   0%, 100% {
     text-shadow:
-      0 0 6px #00fff7,
-      0 0 14px #00e5ff,
-      0 0 30px #00cfff;
+      0 0 6px #0400ff,
+      0 0 14px #007bff,
+      0 0 30px #2600ff;
   }
   50% {
     text-shadow:
-      0 0 12px #00fff7,
-      0 0 28px #00e5ff,
-      0 0 55px #00cfff;
+      0 0 12px #00ff48,
+      0 0 28px #00ff26,
+      0 0 55px #00ff00;
   }
-}
+} */
 
 @keyframes slideUp {
   0% { transform: translateY(30px); opacity: 0; }
@@ -50,7 +50,7 @@ html {
 
 .neon-cursor {
   margin-left: 4px;
-  color: #00fff7;
+  color: #e35ac8;
   animation: blink 1.4s infinite;
 }
 
