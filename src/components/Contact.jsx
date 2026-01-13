@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 bg-red-300">
+    <section id="contact" className="py-24 bg-blue-300">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Section Header */}

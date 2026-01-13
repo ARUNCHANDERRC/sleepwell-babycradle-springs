@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
-// Images (jpeg)
-import PremiumImg from "../assets/premium-quality.jpeg";
-import ExportImg from "../assets/export-quality.jpeg";
-import HangerImg from "../assets/hanger-spring.jpeg";
+// Images
+import PremiumImg from "../assets/Spring_one.jpeg";
+import ExportImg from "../assets/Spring_two.jpeg";
+import HangerImg from "../assets/Spring_three.jpeg";
 
 export default function Products() {
   const [activeModal, setActiveModal] = useState(null);
@@ -131,7 +131,7 @@ export default function Products() {
   );
 }
 
-// Separate Product Card Component
+// Product Card Component
 function ProductCard({
   product,
   index,
@@ -141,26 +141,36 @@ function ProductCard({
   setActiveImageModal,
 }) {
   return (
-    <div className="relative bg-white rounded-3xl p-6 md:p-10 text-center shadow-xl overflow-hidden transform transition hover:scale-105 w-full mx-auto">
-      {/* Floating SVG Icons */}
+    <div className="relative bg-white rounded-3xl p-6 md:p-10 text-center shadow-xl overflow-hidden transform transition hover:scale-105 w-full mx-auto group">
+      {/* Floating Icons */}
       <div className="absolute inset-0 pointer-events-none">
         <span className="absolute top-4 left-4 text-blue-400 animate-float">ℹ️</span>
         <span className="absolute top-6 right-6 text-yellow-400 animate-float delay-200">⭐</span>
         <span className="absolute bottom-6 left-8 text-red-400 animate-float delay-400">❤️</span>
       </div>
 
-      {/* Image */}
+      {/* Image Container */}
       <div
-        onClick={() => setActiveImageModal(index)}
-        className="w-full h-64 md:h-64 mb-6 md:mb-8 rounded-2xl overflow-hidden shadow-lg cursor-pointer"
+        className="relative w-full h-64 md:h-64 mb-6 md:mb-8 rounded-2xl overflow-hidden shadow-lg cursor-pointer"
+        onClick={() => setActiveImageModal(index)} // Click works for all screens
       >
         <img
           src={product.image}
           alt={product.name}
-          className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
+
+        {/* Hover overlay (desktop only) */}
+        <div className="hidden md:flex absolute inset-0 items-center justify-center bg-black/50 pointer-events-none">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="max-h-[80vh] max-w-[90vw] rounded-2xl shadow-2xl animate-scaleUp"
+          />
+        </div>
       </div>
 
+      {/* Product Info */}
       <h4 className="text-xl md:text-2xl font-extrabold text-orange-700 mb-1 md:mb-2">
         {product.name}
       </h4>
@@ -171,10 +181,7 @@ function ProductCard({
 
       <button
         onClick={() => setActiveModal(index)}
-        className="
-          px-6 md:px-7 py-2 md:py-3 rounded-xl bg-blue-700 text-white font-bold text-md md:text-lg
-          transition hover:bg-blue-800 hover:scale-105 shadow-md
-        "
+        className="px-6 md:px-7 py-2 md:py-3 rounded-xl bg-blue-700 text-white font-bold text-md md:text-lg transition hover:bg-blue-800 hover:scale-105 shadow-md"
       >
         Learn More
       </button>
@@ -209,19 +216,20 @@ function ProductCard({
         </div>
       )}
 
-      {/* Full Image Modal */}
+      {/* Full Image Modal (Click works on all screens) */}
       {activeImageModal === index && (
         <div
           onClick={() => setActiveImageModal(null)}
-          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
         >
           <img
             src={product.image}
             alt={product.name}
-            className="max-h-[70vh] max-w-[90vw] rounded-2xl shadow-2xl animate-scaleUp"
+            className="max-h-[90vh] max-w-full rounded-2xl shadow-2xl animate-scaleUp"
           />
         </div>
       )}
     </div>
   );
 }
+

@@ -1,50 +1,66 @@
-import baby_1 from "../assets/baby_1.png";
-import swing from "../assets/spring with thottil.png";
+import baby_1 from '../assets/baby_1.png';
+import swing from '../assets/spring with thottil_2.png'; // transparent PNG
 
 export default function Hero() {
   return (
     <section className="relative w-full h-[100svh] overflow-hidden bg-black">
-      
-      {/* 1. BACKGROUND IMAGE - STATIONARY & CLEAR */}
-      <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
+      {/* BACKGROUND IMAGE */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${baby_1})` }}
       />
 
-      {/* 2. CONTENT LAYER */}
-      <div className="relative z-10 flex items-center justify-end w-full h-full">
-        
-        {/* SWINGING IMAGE CONTAINER */}
-        <div className="animate-swing-slow 
-                        /* MOBILE: Same height as baby_1 background */
-                        w-[90%] 
-                        h-full           /* Forces height to match baby_1 container */
-                        pr-4             /* Slight gap from right edge */
-                        
-                        /* DESKTOP (1024px+): Constrain to prevent cutting */
-                        lg:h-auto 
-                        lg:max-h-[55vh] 
-                        lg:w-[30%] 
-                        lg:pr-20
-                        
-                        flex justify-end items-center">
+      {/* CONTENT */}
+      <div className="relative z-10 w-full h-full flex justify-end items-center">
+        {/* SWING CONTAINER */}
+        <div
+          className="
+            animate-swing-slow
+            origin-top
+            h-full
+            w-[95%]
+            flex items-center justify-end
+            pr-2
+
+            lg:h-[75vh]        /* ⬅️ BIGGER on desktop */
+            lg:w-[45%]         /* ⬅️ wider on desktop */
+            lg:pr-16
+          "
+        >
           <img
             src={swing}
             alt="Spring with thottil"
-            /* Using h-full here ensures the image fills the vertical space 
-               available on mobile while object-contain prevents distortion */
-            className="w-full h-[80%] lg:h-full object-contain" 
+            className="
+              h-[90%]
+              w-auto
+              object-contain
+
+              sm:h-full
+              lg:h-full
+            "
           />
         </div>
       </div>
 
-      {/* 3. CAPTION */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 w-full px-4 flex justify-center">
-        <p className="text-white bg-black/50 backdrop-blur-md px-6 py-2 rounded-full text-xs sm:text-sm border border-white/10 text-center">
-          Baby sleeps peacefully in a cozy hammock swing
-        </p>
-      </div>
+      {/* CAPTION */}
+      {/* CAPTION */}
+      {/* CAPTION */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 px-4 animate-swing-slow">
+        <p className="
+  text-white
+  text-xs sm:text-sm lg:text-xl xl:text-2xl
+  font-semibold tracking-wide
+  bg-black/60 backdrop-blur-lg
+  px-6 sm:px-8 py-2.5 sm:py-3
+  rounded-full
+  border border-white/20
+  shadow-lg shadow-black/40
+  text-center
+">
+  Baby Sleeps Peacefully with Mother's Touch
+</p>
 
+      </div>
     </section>
   );
 }
