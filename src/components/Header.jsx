@@ -32,23 +32,22 @@ export default function Header() {
 
         {/* Navigation Buttons */}
         <nav className="hidden md:flex items-center space-x-4">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={`#${item.name.toLowerCase()}`}
-              className={`
-                px-5 py-2 md:px-6 md:py-3
-                rounded-full
-                text-white font-semibold
-                text-sm md:text-base
-                transition transform hover:scale-105 shadow-md hover:shadow-lg
-                ${item.color}
-              `}
-            >
-              {item.name}
-            </a>
-          ))}
-        </nav>
+  {navItems.map((item) => (
+    <a
+      key={item.name}
+      href={`#${item.name.toLowerCase()}`}
+      className={`
+        px-5 py-2 md:px-6 md:py-3
+        rounded-full text-white font-semibold text-sm md:text-base
+        transition transform hover:scale-105 shadow-md hover:shadow-lg
+        ${item.color}
+      `}
+    >
+      {item.name}
+    </a>
+  ))}
+</nav>
+
       </div>
     </header>
   );

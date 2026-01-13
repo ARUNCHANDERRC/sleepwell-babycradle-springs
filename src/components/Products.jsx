@@ -9,7 +9,7 @@ import HangerImg from "../assets/Spring_three.jpeg";
 export default function Products() {
   const [activeModal, setActiveModal] = useState(null);
   const [activeImageModal, setActiveImageModal] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0); // for mobile swipe
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const products = [
     {
@@ -46,7 +46,7 @@ export default function Products() {
   return (
     <section
       id="products"
-      className="py-24 relative overflow-hidden"
+      className="py-28 relative overflow-hidden"
       style={{
         background: "linear-gradient(135deg, #e0f2fe, #fdf2f8, #ecfeff)",
         backgroundSize: "300% 300%",
@@ -82,6 +82,7 @@ export default function Products() {
             setActiveModal={setActiveModal}
             activeImageModal={activeImageModal}
             setActiveImageModal={setActiveImageModal}
+            className="h-[80vh]"
           />
 
           {/* Swipe Indicators */}
@@ -116,13 +117,8 @@ export default function Products() {
           100% { transform: scale(1); opacity: 1; }
         }
 
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-
-        .animate-scaleUp {
-          animation: scaleUp 0.3s ease-out;
-        }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-scaleUp { animation: scaleUp 0.3s ease-out; }
 
         .delay-200 { animation-delay: 0.2s; }
         .delay-400 { animation-delay: 0.4s; }
@@ -131,7 +127,7 @@ export default function Products() {
   );
 }
 
-// Product Card Component
+// Separate Product Card Component
 function ProductCard({
   product,
   index,
@@ -139,9 +135,12 @@ function ProductCard({
   setActiveModal,
   activeImageModal,
   setActiveImageModal,
+  className = "",
 }) {
   return (
-    <div className="relative bg-white rounded-3xl p-6 md:p-10 text-center shadow-xl overflow-hidden transform transition hover:scale-105 w-full mx-auto group">
+    <div
+      className={`relative bg-white rounded-3xl p-6 md:p-10 text-center shadow-xl hover:shadow-2xl transform transition hover:scale-105 w-full mx-auto ${className}`}
+    >
       {/* Floating Icons */}
       <div className="absolute inset-0 pointer-events-none">
         <span className="absolute top-4 left-4 text-blue-400 animate-float">ℹ️</span>
@@ -149,28 +148,18 @@ function ProductCard({
         <span className="absolute bottom-6 left-8 text-red-400 animate-float delay-400">❤️</span>
       </div>
 
-      {/* Image Container */}
+      {/* Image */}
       <div
-        className="relative w-full h-64 md:h-64 mb-6 md:mb-8 rounded-2xl overflow-hidden shadow-lg cursor-pointer"
-        onClick={() => setActiveImageModal(index)} // Click works for all screens
+        onClick={() => setActiveImageModal(index)}
+        className="w-full h-72 sm:h-80 md:h-64 mb-6 md:mb-8 rounded-2xl overflow-hidden shadow-lg cursor-pointer"
       >
         <img
           src={product.image}
           alt={product.name}
-          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
         />
-
-        {/* Hover overlay (desktop only) */}
-        <div className="hidden md:flex absolute inset-0 items-center justify-center bg-black/50 pointer-events-none">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="max-h-[80vh] max-w-[90vw] rounded-2xl shadow-2xl animate-scaleUp"
-          />
-        </div>
       </div>
 
-      {/* Product Info */}
       <h4 className="text-xl md:text-2xl font-extrabold text-orange-700 mb-1 md:mb-2">
         {product.name}
       </h4>
@@ -193,11 +182,9 @@ function ProductCard({
             <h3 className="text-2xl md:text-3xl font-extrabold text-center text-orange-700 mb-4 md:mb-6">
               {product.name}
             </h3>
-
             <p className="text-gray-700 text-md md:text-lg mb-3 font-semibold">
               {product.description}
             </p>
-
             <p className="text-gray-800 leading-relaxed text-sm md:text-base">
               {product.details.split("Weight Support:")[0]}
               <br />
@@ -216,20 +203,19 @@ function ProductCard({
         </div>
       )}
 
-      {/* Full Image Modal (Click works on all screens) */}
+      {/* Full Image Modal */}
       {activeImageModal === index && (
         <div
           onClick={() => setActiveImageModal(null)}
-          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
         >
           <img
             src={product.image}
             alt={product.name}
-            className="max-h-[90vh] max-w-full rounded-2xl shadow-2xl animate-scaleUp"
+            className="max-h-[80vh] max-w-[90vw] rounded-2xl shadow-2xl animate-scaleUp"
           />
         </div>
       )}
     </div>
   );
 }
-
